@@ -1,0 +1,34 @@
+<form class="example-form" [formGroup]="loaderForm">
+  <div class="editing-fields">
+    <p>Внесите изменения в выбранном погрузчике</p>
+    <mat-form-field class="example-full-width">
+      <mat-label>Марка</mat-label>
+      <input matInput formControlName="brand" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Номер</mat-label>
+      <input matInput formControlName="number" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Грузоподъемность</mat-label>
+      <input matInput formControlName="capacity" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Статус активности</mat-label>
+      <mat-select matInput formControlName="isActive" value="true">
+        <mat-option [value]="true">Активен</mat-option>
+        <mat-option [value]="false">Не активен</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Пользователь</mat-label>
+      <input matInput formControlName="user" />
+    </mat-form-field>
+    <div class="save-or-not-buttons">
+      <button matButton="filled" (click)="onSave()">Сохранить</button>
+      <div class="button-not-save">
+        <button matButton (click)="onClose()">Не сохранять</button>
+      </div>
+    </div>
+  </div>
+</form>

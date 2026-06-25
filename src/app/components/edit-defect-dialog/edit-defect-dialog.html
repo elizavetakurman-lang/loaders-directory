@@ -1,0 +1,27 @@
+<form class="example-form" [formGroup]="defectForm">
+  <div class="editing-fields">
+    <p>Внесите изменения в простой</p>
+    <mat-form-field class="example-full-width">
+      <mat-label>Начало</mat-label>
+      <input type="datetime-local" matInput formControlName="dateOfProblemIdentification" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Окончание</mat-label>
+      <input type="datetime-local" matInput formControlName="dateOfProblemSolved" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Время простоя</mat-label>
+      <input matInput formControlName="durationOfDefectInMinutes" />
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Причина</mat-label>
+      <input matInput formControlName="reasonOfDefect" />
+    </mat-form-field>
+    <div class="save-or-not-buttons">
+      <button matButton="filled" (click)="onSave()">Сохранить</button>
+      <div class="button-not-save">
+        <button matButton (click)="onClose()">Не сохранять</button>
+      </div>
+    </div>
+  </div>
+</form>

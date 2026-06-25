@@ -1,0 +1,92 @@
+<div class="loaders-dir-container">
+  <div class="content">
+    <h1>Справочник погрузчиков</h1>
+    <div class="filter">
+      <span class="filter-input">
+        <label>Номер погрузчика</label>
+        <input [(ngModel)]="loaderNumberFilterValue" />
+      </span>
+      <button matButton="filled" (click)="onFilter()">
+        <mat-icon>search</mat-icon>
+        Искать
+      </button>
+      <a class="reset-filter">
+        <mat-icon style="color: red">close</mat-icon>
+        <span class="reset-filter-text" (click)="resetFilter()">Сбросить фильтр</span>
+      </a>
+    </div>
+    <button matButton="filled" (click)="openAddLoaderDialog()">Добавить</button>
+    <div class="info-tables">
+      <div class="loaders-table">
+        <table mat-table [dataSource]="loadersDataSource">
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Код записи</th>
+            <td mat-cell *matCellDef="let loader">{{loader.id}}</td>
+          </ng-container>
+          <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef>Марка</th>
+            <td mat-cell *matCellDef="let loader">{{loader.brand}}</td>
+          </ng-container>
+          <ng-container matColumnDef="number">
+            <th mat-header-cell *matHeaderCellDef>Номер</th>
+            <td mat-cell *matCellDef="let loader">{{loader.number}}</td>
+          </ng-container>
+          <ng-container matColumnDef="capacity">
+            <th mat-header-cell *matHeaderCellDef>Грузоподъёмность</th>
+            <td mat-cell *matCellDef="let loader">{{loader.capacity}}</td>
+          </ng-container>
+          <ng-container matColumnDef="isActive">
+            <th mat-header-cell *matHeaderCellDef>Активен</th>
+            <td mat-cell *matCellDef="let loader">
+              @if (loader.isActive) {
+              <mat-icon>check</mat-icon>
+              } @else {
+              <mat-icon>close</mat-icon>
+              }
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="modifiedAt">
+            <th mat-header-cell *matHeaderCellDef>Время и дата изменения</th>
+            <td mat-cell *matCellDef="let loader">{{loader.modifiedAt | date:'dd.MM.yyyy HH:mm:ss'}}</td>
+          </ng-container>
+          <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef>Пользователь</th>
+            <td mat-cell *matCellDef="let loader">{{loader.user}}</td>
+          </ng-container>
+          <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef>Действия</th>
+            <td mat-cell *matCellDef="let loader">
+              <button
+                mat-icon-button
+                class="edit-icon"
+                color="primary"
+                matTooltip="Редактировать"
+                (click)="openEditLoaderDialog(loader.id)"
+              >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button
+                mat-icon-button
+                class="delete-icon"
+                color="warn"
+                matTooltip="Удалить"
+                (click)="deleteLoader(loader.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="showLoaderDefect(row)"></tr>
+        </table>
+      </div>
+      <div class="defect-table">
+        <div><b>Простои по погрузчику</b></div>
+        <button matButton="filled" (click)="openAddDefectDialog()" [disabled]="!choosenLoaderId()">Добавить</button>
+        <div class="table">
+          <table mat-table [dataSource]="choosenLoaderDefects()"></table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

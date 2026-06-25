@@ -1,0 +1,7 @@
+<div class="dialog">
+  <h2 mat-dialog-title>Вы уверены, что хотите удалить {{message()}}?</h2>
+  <div class="yes-or-no">
+    <button matButton (click)="onNoClick()">Нет</button>
+    <button matButton [mat-dialog-close]="true" cdkFocusInitial>Да</button>
+  </div>
+</div>
